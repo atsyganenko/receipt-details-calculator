@@ -25,10 +25,10 @@ class ReceiptDetailsTest {
     @Test
     void multipleItemsOfSameProduct() {
         List<Product> products = List.of(new Product("book", "29.49"),
-                                         new Product("book", "27.32"));
+                                         new Product("book", "29.49"));
 
         String actual = new ReceiptDetails(products).calculate();
-        String expected = "2 book: 66.75\nSales Taxes: 9.94\nTotal: 66.75\n";
+        String expected = "2 book: 34.65\nSales Taxes: 10.32\nTotal: 69.30\n";
 
         assertEquals(expected, actual);
     }

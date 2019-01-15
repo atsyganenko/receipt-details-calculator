@@ -48,8 +48,10 @@ public class ReceiptDetails {
     }
 
     private String calculateProductDetails(String productName, List<Product> items) {
-        BigDecimal priceIncludingTaxes = items.stream().map(Product::getPriceIncludingTaxes)
-                                              .reduce(BigDecimal.ZERO, BigDecimal::add);
-        return String.format("%d %s: %s\n", items.size(), productName, priceIncludingTaxes);
+        BigDecimal pricePerItemIncludingTaxes = items.stream().findFirst()
+                                                     .map(Product::getPriceIncludingTaxes)
+                                                     .orElseThrow(() -> new IllegalArgumentException(
+                                                             "items list should contain at least one item"));
+        return String.format("%d %s: %s\n", items.size(), productName, pricePerItemIncludingTaxes);
     }
 }
